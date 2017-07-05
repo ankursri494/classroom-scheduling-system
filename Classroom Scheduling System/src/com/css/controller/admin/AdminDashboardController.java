@@ -11,11 +11,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 //import javax.swing.JOptionPane;
 
-import com.css.controller.Classroom.AddClassroomController;
-import com.css.controller.Classroom.DeleteClassroomController;
-import com.css.controller.Classroom.UpdateClassroomController;
-import com.css.controller.Trainer.AddTrainerController;
-import com.css.controller.Trainer.UpdateTrainerController;
+import com.css.controller.classroom.AddClassroomController;
+import com.css.controller.classroom.DeleteClassroomController;
+import com.css.controller.classroom.UpdateClassroomController;
+import com.css.controller.trainer.AddTrainerController;
+import com.css.controller.trainer.UpdateTrainerController;
 import com.css.controller.student.AddStudentController;
 import com.css.controller.training.AddTrainingProgramController;
 import com.css.controller.training.DeleteTrainingProgramController;

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import com.css.factory.DbFactory;
 import com.css.model.ClassroomVO;
 
@@ -46,7 +48,7 @@ public class ClassroomDAO {
 
 	public int updateData(ClassroomVO classData){
 		try{
-			preparedStatement = connection.prepareStatement("update css_classroom set class_block=?, class_floor=?, class_capacity=? where classroom_id=?");
+			preparedStatement = connection.prepareStatement("update css_classroom set class_block=?, class_floor=?, class_capacity=? where class_id=?");
 
 			preparedStatement.setString(1,classData.getClassBlock());
 			preparedStatement.setString(2,classData.getClassFloor());
@@ -72,7 +74,7 @@ public class ClassroomDAO {
 		try{
 
 			classDetails = new ClassroomVO();
-			preparedStatement = connection.prepareStatement("select class_block,class_floor,class_capacity from css_classroom where classroom_id=?");
+			preparedStatement = connection.prepareStatement("select class_block,class_floor,class_capacity from css_classroom where class_id=?");
 			preparedStatement.setString(1,classId);
 			resultSet=preparedStatement.executeQuery();
 
@@ -97,7 +99,7 @@ public class ClassroomDAO {
 	
 	public int deleteData(ClassroomVO classData){
 		try{
-			preparedStatement = connection.prepareStatement("delete from css_classroom where classroom_id=?");
+			preparedStatement = connection.prepareStatement("delete from css_classroom where class_id=?");
 			preparedStatement.setString(1,classData.getClassId());
 			result = preparedStatement.executeUpdate();
 			if(result>0)
@@ -111,6 +113,31 @@ public class ClassroomDAO {
 			db.closeCon();
 		}
 		return result;
+	}
+	
+	public ArrayList<ClassroomVO> viewData() {
+		ArrayList<ClassroomVO> classrooms=new ArrayList<ClassroomVO>();
+		try {
+			preparedStatement = connection.prepareStatement("select * from css_classroom");
+			resultSet=preparedStatement.executeQuery();
+			while(resultSet.next())
+			{
+				classDetails = new ClassroomVO();
+				classDetails.setClassId(resultSet.getString(1));
+				classDetails.setClassBlock(resultSet.getString(2));
+				classDetails.setClassFloor(resultSet.getString(3));
+				classDetails.setClassCapacity(resultSet.getString(4));
+				classrooms.add(classDetails);				
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e);
+		}
+		finally{
+			db.closeCon();
+		}
+		return classrooms;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.css.service;
 
+import java.util.ArrayList;
+
 import com.css.dao.ClassroomDAO;
 import com.css.model.ClassroomVO;
 
@@ -26,5 +28,8 @@ public class ClassroomService {
 	public int deleteDataService(ClassroomVO classData ){
 		return classroom.deleteData(classData);
 	}
-
+	
+	public ArrayList<ClassroomVO> viewDataService(){
+		return classroom.viewData();
+	}
 }

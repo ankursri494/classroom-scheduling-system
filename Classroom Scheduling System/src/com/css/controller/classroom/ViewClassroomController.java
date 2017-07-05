@@ -1,4 +1,4 @@
-package com.css.controller;
+package com.css.controller.classroom;
 
 import java.util.ArrayList;
 
@@ -39,10 +39,10 @@ public class ViewClassroomController {
 		String headers[] = {"Classroom Id","Block","Floors","Capacity"};
 		DefaultTableModel tableModel = new DefaultTableModel(headers, 0);		
 		for (int i = 0; i < classrooms.size(); i++){
-			String classId=classrooms.get(i).getID();
-			String classBlock=classrooms.get(i).getBlock();
-			String classFloor=classrooms.get(i).getFloor();
-			String classCapacity=classrooms.get(i).getCapacity();
+			String classId=classrooms.get(i).getClassId();
+			String classBlock=classrooms.get(i).getClassBlock();
+			String classFloor=classrooms.get(i).getClassFloor();
+			String classCapacity=classrooms.get(i).getClassCapacity();
 
 			Object[] data = {classId,classBlock,classFloor,classCapacity};
 			tableModel.addRow(data);
