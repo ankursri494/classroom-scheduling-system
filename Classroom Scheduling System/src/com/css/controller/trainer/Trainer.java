@@ -3,6 +3,8 @@ package com.css.controller.trainer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
+
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
@@ -15,6 +17,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+
+import com.css.model.TrainingProgramVO;
+import com.css.service.TrainingProgramService;
 
 public class Trainer {
 
@@ -127,14 +132,18 @@ public class Trainer {
 		panel.add(training);
 		
 		DefaultListModel<String> d1 = new DefaultListModel<>();
-		d1.addElement("a");
+		TrainingProgramService es = new TrainingProgramService();
+		List<TrainingProgramVO> l = es.displayAllTrainingProgramService();
+		for (TrainingProgramVO trainingProgramVO : l) {
+			d1.addElement(trainingProgramVO.getTrainingName());
+		}
+		/*d1.addElement("a");
 		d1.addElement("b");
 		d1.addElement("c");
 		d1.addElement("d");
-		d1.addElement("e");
+		d1.addElement("e");*/
 		trainings = new JList<>(d1);
 		trainings.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		trainings.setVisibleRowCount(2);
 		JScrollPane sp = new JScrollPane(trainings);
 		sp.setBounds(165, 317, 156, 60);
 		panel.add(sp);

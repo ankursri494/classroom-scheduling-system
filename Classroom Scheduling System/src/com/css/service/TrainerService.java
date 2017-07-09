@@ -1,8 +1,10 @@
 package com.css.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.css.dao.TrainerDAO;
+import com.css.model.TrainerAvailabilityVO;
 import com.css.model.TrainerVO;
 
 public class TrainerService {
@@ -15,6 +17,10 @@ public class TrainerService {
 	
 	public int addTrainerService(TrainerVO trainerVO){
 		return trainerDAO.addTrainer(trainerVO);
+	}
+	
+	public int initializeTrainerScheduleService(int id){
+		return trainerDAO.initializeTrainerSchedule(id);
 	}
 	
 	public int updateTrainerService(TrainerVO trainerVO){
@@ -44,5 +50,10 @@ public class TrainerService {
 	 public int addTrainersTrainingsService(TrainerVO trainerVO){
 		 return trainerDAO.addTrainersTrainings(trainerVO);
 	 }
+	 
+	 public List<TrainerAvailabilityVO> getTrainerScheduleService(int trainerId) 
+	    {
+		 return trainerDAO.getTrainerSchedule(trainerId);
+	    }
 
 }

@@ -57,7 +57,7 @@ public class DeleteClassroomController implements ActionListener {
 		deleteDetails.setBounds(65,150,200,30);
 		formPanel.add(deleteDetails);
 
-		ImageIcon background = new ImageIcon("D:\\Summer Training Project\\img\\classroom.jpg");
+		ImageIcon background = new ImageIcon("..\\ClassroomSchedulingSystem\\img\\classroom.jpg");
 		labelImg = new JLabel();
 		labelImg.setBounds(0,0,screenSize.width-450,screenSize.height);
 		labelImg.setIcon(background);

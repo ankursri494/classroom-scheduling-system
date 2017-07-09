@@ -6,17 +6,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import com.css.factory.DbFactory;
+import com.css.model.ClassroomAvailabilityVO;
+import com.css.model.TrainerAvailabilityVO;
 import com.css.model.TrainerVO;
 
 public class TrainerDAO {
 	Connection connection;
 	DbFactory dbFactory;
-	PreparedStatement preparedStatement;
-	ResultSet resultSet;
+	PreparedStatement preparedStatement,preparedStatement1;
+	ResultSet resultSet,resultSet1;
 	int result;
 	TrainerVO trainerVO;
 	
@@ -30,7 +33,7 @@ public class TrainerDAO {
 	{	
 
 		try{
-			preparedStatement = connection.prepareStatement("insert into css_trainer (trainer_name,trainer_age,trainer_gender,trainer_qualification,trainer_email,trainer_password) values(?,?,?,?,?,?)");
+			preparedStatement = connection.prepareStatement("insert into css_trainer (trainer_name,trainer_age,trainer_gender,trainer_qualification,trainer_email,trainer_password) values	(?,?,?,?,?,?)");
 			preparedStatement.setString(1,trainerVO.getTrainerName());
 			preparedStatement.setInt(2, trainerVO.getTrainerAge());
 			preparedStatement.setString(3, trainerVO.getTrainerGender());
@@ -44,11 +47,41 @@ public class TrainerDAO {
 		}
 		catch(SQLException e)
 		{
-			//System.out.println("DAO Exception");
+			System.out.println(e);
 			JOptionPane.showMessageDialog(null, "Email Id already Registered.!!");
 		}
 		return result;
 	}
+	
+	public int initializeTrainerSchedule(int id){
+		try{
+			preparedStatement = connection.prepareStatement("insert into css_trainer_schedule (trainer_id, day) values (?,'Monday')");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeUpdate();
+			preparedStatement = connection.prepareStatement("insert into css_trainer_schedule (trainer_id, day) values (?,'Tuesday')");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeUpdate();
+			preparedStatement = connection.prepareStatement("insert into css_trainer_schedule (trainer_id, day) values (?,'Wednesday')");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeUpdate();
+			preparedStatement = connection.prepareStatement("insert into css_trainer_schedule (trainer_id, day) values (?,'Thursday')");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeUpdate();
+			preparedStatement = connection.prepareStatement("insert into css_trainer_schedule (trainer_id, day) values (?,'Friday')");
+			preparedStatement.setInt(1, id); 
+			result = preparedStatement.executeUpdate();
+			if(result>0)
+				connection.commit();
+		}
+		catch(SQLException e){
+			System.out.println(e);
+		}
+		finally{
+			dbFactory.closeCon();
+		}
+		return result;
+	}
+	
 	public ArrayList<Integer> getTrainersTrainingsId(TrainerVO trainerVO){
 		ArrayList<String> al;
 		ArrayList<Integer> al2 = new ArrayList<Integer>();
@@ -167,7 +200,7 @@ public class TrainerDAO {
 			    
 			}
 			catch(SQLException ab){
-				System.out.println(ab);
+				System.out.println("search");
 			} 
 			return null;	
 	}
@@ -221,6 +254,46 @@ public class TrainerDAO {
 		}
 		return result;
 	}
-
-
-}
+    
+    TrainerAvailabilityVO trainerAvailabilityVO;
+    public List<TrainerAvailabilityVO> getTrainerSchedule(int trainerId) 
+    {
+    	List<TrainerAvailabilityVO> listTrainingProgram=new ArrayList<TrainerAvailabilityVO>();
+		try
+		{
+	preparedStatement=connection.prepareStatement("SELECT * from css_trainer_schedule where trainer_id=? ORDER BY CASE WHEN day = 'Monday' THEN '1'WHEN day = 'Tuesday' THEN '2'WHEN day = 'Wednesday' THEN '3' WHEN day = 'Thursday' THEN '4' WHEN day = 'Friday' THEN '5' ELSE day END ASC");
+	preparedStatement.setInt(1,trainerId);
+	resultSet=preparedStatement.executeQuery();
+	while(resultSet.next())
+	{
+		trainerAvailabilityVO=new TrainerAvailabilityVO();
+		trainerAvailabilityVO.setTrainerId(trainerId);
+		trainerAvailabilityVO.setDay(resultSet.getString(2));
+		trainerAvailabilityVO.setTimeSlot1(resultSet.getInt(3));
+		trainerAvailabilityVO.setTimeSlot2(resultSet.getInt(4));
+		trainerAvailabilityVO.setTimeSlot3(resultSet.getInt(5));
+	for(int i=1;i<=3;i++)
+	{
+	preparedStatement1=connection.prepareStatement("Select training_id from css_schedule where day=? and trainer_id=? and time=?");
+	preparedStatement1.setString(1,resultSet.getString(2));
+	preparedStatement1.setInt(2,trainerId);
+	preparedStatement1.setInt(3,i);
+	resultSet1=preparedStatement1.executeQuery();
+	while(resultSet1.next()) {
+	if(i==1)
+		trainerAvailabilityVO.setTraining1(resultSet1.getInt(1)); 
+	else if(i==2)
+		trainerAvailabilityVO.setTraining2(resultSet1.getInt(1)); 
+	else
+		trainerAvailabilityVO.setTraining3(resultSet1.getInt(1)); }
+	}
+	listTrainingProgram.add(trainerAvailabilityVO);
+	}
+	}
+	catch(SQLException ab){
+	System.out.println(ab);
+	}
+	return listTrainingProgram;
+	}
+    
+    }

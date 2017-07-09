@@ -14,19 +14,21 @@ import javax.swing.JMenuItem;
 import com.css.controller.classroom.AddClassroomController;
 import com.css.controller.classroom.DeleteClassroomController;
 import com.css.controller.classroom.UpdateClassroomController;
-import com.css.controller.trainer.AddTrainerController;
-import com.css.controller.trainer.UpdateTrainerController;
 import com.css.controller.student.AddStudentController;
+import com.css.controller.trainer.AddTrainerController;
+import com.css.controller.trainer.DeleteTrainerController;
+import com.css.controller.trainer.UpdateTrainerController;
 import com.css.controller.training.AddTrainingProgramController;
 import com.css.controller.training.DeleteTrainingProgramController;
 import com.css.controller.training.DisplayAllTrainingProgramController;
+import com.css.controller.training.ScheduleTrainingProgramController;
 import com.css.controller.training.UpdateTrainingProgramController;
 
 public class AdminDashboardController implements ActionListener {
 	JFrame frame;
 	JMenuBar menuBar;
 	JMenu trainingProgram, trainer, student, classroom;
-	JMenuItem addTrainingProgram, updateTrainingProgram, deleteTrainingProgram, viewTrainingProgram, addTrainer,
+	JMenuItem addTrainingProgram, updateTrainingProgram, deleteTrainingProgram,scheduleTrainingProgram, viewTrainingProgram, addTrainer,
 			updateTrainer, deleteTrainer, viewTrainer, addStudent, updateStudent, deleteStudent, viewStudent,
 			addClassroom, updateClassroom, deleteClassroom, viewClassroom;
 
@@ -42,6 +44,7 @@ public class AdminDashboardController implements ActionListener {
 		addTrainingProgram = new JMenuItem("Add");
 		updateTrainingProgram = new JMenuItem("Update");
 		deleteTrainingProgram = new JMenuItem("Delete");
+		scheduleTrainingProgram = new JMenuItem("Schedule");
 		viewTrainingProgram = new JMenuItem("View");
 
 		addTrainer = new JMenuItem("Add");
@@ -63,6 +66,7 @@ public class AdminDashboardController implements ActionListener {
 		updateTrainingProgram.addActionListener(this);
 		deleteTrainingProgram.addActionListener(this);
 		viewTrainingProgram.addActionListener(this);
+		scheduleTrainingProgram.addActionListener(this);
 
 		addTrainer.addActionListener(this);
 		updateTrainer.addActionListener(this);
@@ -82,6 +86,7 @@ public class AdminDashboardController implements ActionListener {
 		trainingProgram.add(addTrainingProgram);
 		trainingProgram.add(updateTrainingProgram);
 		trainingProgram.add(deleteTrainingProgram);
+		trainingProgram.add(scheduleTrainingProgram);
 		trainingProgram.add(viewTrainingProgram);
 
 		trainer.add(addTrainer);
@@ -127,6 +132,9 @@ public class AdminDashboardController implements ActionListener {
 			new DeleteTrainingProgramController();
 
 		}
+		else if(e.getSource()==scheduleTrainingProgram){
+			new ScheduleTrainingProgramController();
+		}
 		else if (e.getSource() == viewTrainingProgram) {
 
 			new DisplayAllTrainingProgramController();
@@ -138,8 +146,8 @@ public class AdminDashboardController implements ActionListener {
 			
 		new UpdateTrainerController();
 		}
-		else if (e.getSource() == deleteTrainer) { // new
-														// DeleteTrainerController();
+		else if (e.getSource() == deleteTrainer) { 
+			new DeleteTrainerController();
 		}
 		else if (e.getSource() == viewTrainer) { // new
 													// DisplayAllTrainerController();

@@ -1,5 +1,6 @@
 package com.css.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.css.dao.TrainingProgramDAO;
@@ -39,4 +40,19 @@ public class TrainingProgramService {
  		return trainingProgramDAO.searchTrainingProgram(TrainingId);
 	}
 	
+	public HashMap<Integer,String> getAvailabletrainerService(String training)
+	{
+		return trainingProgramDAO.getAvailabletrainer(training);
+	}
+	
+	public HashMap<Integer,Integer> getAvailableTimeService(int trainerId, String day)
+	{
+		return trainingProgramDAO.getAvailableTime(trainerId, day);
+	}
+	
+	public int scheduleTrainingService(String trainingName,int trainerId,String day,int time,int classId)
+	{
+		return trainingProgramDAO.scheduleTraining(trainingName,trainerId,day,time,classId);
+	}
+
 }

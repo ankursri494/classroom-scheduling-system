@@ -122,16 +122,15 @@ public class StudentDAO {
 			return null;	
 	}
 	
-	public int deleteStudent(String studentId){
+	public int deleteStudent(int studentId){
 		try{
     		try{
-    			int id = Integer.parseInt(studentId);
 			    preparedStatement=connection.prepareStatement("delete from css_student where student_id=?");      			
     		}
     		catch(NumberFormatException e){
 			    preparedStatement=connection.prepareStatement("delete from css_student where student_email=?");      			
     		}
-    		preparedStatement.setString(1,studentId);
+    		preparedStatement.setInt(1,studentId);
 		    resultSet=preparedStatement.executeQuery();
 		    if(resultSet.next())
 		    	return 1;

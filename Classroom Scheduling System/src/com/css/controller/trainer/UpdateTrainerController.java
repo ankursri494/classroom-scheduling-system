@@ -112,6 +112,7 @@ public class UpdateTrainerController extends Trainer implements ActionListener{
 		else if(e.getSource()==getinfo){
 			TrainerService trainerService = new  TrainerService();
 			trainerVO = trainerService.searchTrainer(idTextField.getText());
+			if(trainerVO!=null){
 			idTextField.setEnabled(false);
 			getinfo.setEnabled(false); 
 			nameTextField.setText(trainerVO.getTrainerName());
@@ -125,7 +126,7 @@ public class UpdateTrainerController extends Trainer implements ActionListener{
 			else
 				female.setSelected(true);
 			nameTextField.setEnabled(true);
-			emailTextField.setEnabled(true);
+			emailTextField.setEnabled(true); 
 			ageTextField.setEnabled(true);
 			qualificationTextField.setEnabled(true); 
 			passwordField.setEnabled(true);
@@ -134,7 +135,10 @@ public class UpdateTrainerController extends Trainer implements ActionListener{
 			female.setEnabled(true);
 			trainings.setEnabled(true);
 			agree.setEnabled(true); 
-			btnSubmit.setEnabled(true); 
+			btnSubmit.setEnabled(true); }
+			else{
+				JOptionPane.showMessageDialog(getinfo, "Enter correct Id");
+			}
 		}
 	}
 }

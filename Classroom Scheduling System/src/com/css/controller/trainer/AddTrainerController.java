@@ -42,7 +42,7 @@ public class AddTrainerController extends Trainer implements  ActionListener{
 		TrainerVO trainerVO = new TrainerVO();
 		if(e.getSource() == btnSubmit)
 		{
-			int x = 0,z=0;int s7=0;int y;
+			int x = 0;int s7=0;int y;
 			try
 			{
 				//Getting Values From Trainer's Registration Form.
@@ -93,8 +93,9 @@ public class AddTrainerController extends Trainer implements  ActionListener{
 							{		
 								y=trainerService.getTrainerIdService();
 								trainerVO.setTrainerId(y); 
+								trainerService.initializeTrainerScheduleService(y);
 								System.out.println(trainerVO.getTrainerId()); 
-								z= trainerService.addTrainersTrainingsService(trainerVO);
+								trainerService.addTrainersTrainingsService(trainerVO);
 								JOptionPane.showMessageDialog(btnSubmit, "You are Successfully Registered!! Your user id is :" +y);
 								nameTextField.setText("");
 								emailTextField.setText("");

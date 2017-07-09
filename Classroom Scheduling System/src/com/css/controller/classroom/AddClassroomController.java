@@ -79,7 +79,7 @@ public class AddClassroomController implements ActionListener {
 		addDetails.setBounds(65,330,200,30);
 		formPanel.add(addDetails);
 
-		ImageIcon background = new ImageIcon("D:\\Summer Training Project\\img\\classroom.jpg");
+		ImageIcon background = new ImageIcon("..\\ClassroomSchedulingSystem\\img\\classroom.jpg");
 		labelImg = new JLabel();
 		labelImg.setBounds(0,0,screenSize.width-450,screenSize.height);
 		labelImg.setIcon(background);
@@ -124,7 +124,8 @@ public class AddClassroomController implements ActionListener {
 				ClassroomService classroomservice = new ClassroomService();
 				x=classroomservice.addDataService(classData);
 				if(x>0){
-					JOptionPane.showMessageDialog(addDetails, "Classroom Details added Successfully!!");
+					x=classroomservice.initializeClassAvailabilityService(s1);
+ 					JOptionPane.showMessageDialog(addDetails, "Classroom Details added Successfully!!");
 				}
 				classFrame.dispose();
 			}

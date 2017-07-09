@@ -85,7 +85,7 @@ public class UpdateClassroomController implements ActionListener {
 		updateDetails.setBounds(65,330,200,30);
 		formPanel.add(updateDetails);
 
-		ImageIcon background = new ImageIcon("D:\\Summer Training Project\\img\\classroom.jpg");
+		ImageIcon background = new ImageIcon("..\\ClassroomSchedulingSystem\\img\\classroom.jpg");
 		labelImg = new JLabel();
 		labelImg.setBounds(0,0,screenSize.width-450,screenSize.height);
 		labelImg.setIcon(background);

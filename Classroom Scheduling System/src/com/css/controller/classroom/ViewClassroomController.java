@@ -20,7 +20,7 @@ public class ViewClassroomController {
 	JFrame classFrame;
 	JPanel tablePanel;
 	
-	ViewClassroomController(){
+	public ViewClassroomController(){
 
 		classFrame = new JFrame("View Classrooms");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
