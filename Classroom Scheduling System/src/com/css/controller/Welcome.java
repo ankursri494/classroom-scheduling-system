@@ -25,17 +25,17 @@ public class Welcome implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setContentPane(new JLabel(new ImageIcon(
-				"/home/ankur/Documents/workspace/Classroom Scheduling System/src/com/css/images/welcome.jpeg")));
+				"/home/ankur/Documents/git/classroom-scheduling-system/Classroom Scheduling System/src/com/css/images/welcome.jpeg")));
 
 		ImageIcon loginbutton = new ImageIcon(
-				"/home/ankur/Documents/workspace/Classroom Scheduling System/src/com/css/images/loginbutton.png");
+				"/home/ankur/Documents/git/classroom-scheduling-system/Classroom Scheduling System/src/com/css/images/loginbutton.png");
 		login = new JButton();
 		login.setBounds(250, 500, loginbutton.getIconWidth(), loginbutton.getIconHeight());
 		login.setIcon(loginbutton);
 		frame.add(login);
 
 		ImageIcon registerbutton = new ImageIcon(
-				"/home/ankur/Documents/workspace/Classroom Scheduling/System/src/com/css/images/registerbutton.jpg");
+				"/home/ankur/Documents/git/classroom-scheduling-system/Classroom Scheduling System/src/com/css/images/registerbutton.jpg");
 		register = new JButton();
 		register.setBounds(700, 500, registerbutton.getIconWidth(), registerbutton.getIconHeight());
 		register.setIcon(registerbutton);
